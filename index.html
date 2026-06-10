@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Traveler's Communications Field Manual</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0d0d0d; --bg-card:#141412; --bg-deep:#0a0a09;
+  --text:#ddd6c8; --dim:#948e85; --muted:#514e4a;
+  --accent:#c97d3e; --adim:rgba(201,125,62,.12); --adimmer:rgba(201,125,62,.06);
+  --blue:#5a8fa8; --bdim:rgba(90,143,168,.10);
+  --border:#222220; --ba:rgba(201,125,62,.28);
+  --s4:#4a8a55; --s3:#7a9a3c; --s2:#b08a2a; --s1:#a04535; --s0:#6a3058;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Courier Prime','Courier New',monospace;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;line-height:1;}
+.kicker{font-family:'Special Elite',serif;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:block;}
+p{color:var(--dim);}
+strong{color:var(--text);font-weight:700;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(10px);}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:54px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;color:var(--accent);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-links{display:flex;list-style:none;overflow-x:auto;scrollbar-width:none;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links a{font-family:'Special Elite',serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:.3rem .65rem;white-space:nowrap;transition:color .18s;}
+.nav-links a:hover{color:var(--accent);}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 2rem;}
+
+.hero{padding:130px 2rem 90px;max-width:1280px;margin:0 auto;position:relative;overflow:hidden;}
+.hero-ey{font-family:'Special Elite',serif;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem;display:flex;align-items:center;gap:1rem;}
+.hero-ey::before{content:'';display:block;width:44px;height:1px;background:var(--accent);}
+.hero h1{font-size:clamp(3.8rem,9vw,8rem);line-height:.9;margin-bottom:1.4rem;}
+.hero h1 em{color:var(--accent);font-style:normal;}
+.hero-sub{font-family:'Special Elite',serif;font-size:1rem;color:var(--dim);max-width:580px;line-height:1.65;margin-bottom:3rem;}
+.hero-rule{height:1px;background:linear-gradient(90deg,var(--accent),var(--blue) 40%,transparent);margin-bottom:2.5rem;}
+.hero-stats{display:flex;gap:3.5rem;flex-wrap:wrap;}
+.hstat{display:flex;flex-direction:column;gap:.25rem;}
+.hstat-l{font-family:'Special Elite',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.hstat-v{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.06em;}
+.bars-deco{position:absolute;right:3rem;top:148px;display:flex;align-items:flex-end;gap:7px;opacity:.1;pointer-events:none;}
+.bars-deco span{display:block;width:20px;background:var(--accent);border-radius:3px 3px 0 0;}
+
+.sw{padding:0 0 5rem;}
+.sh{padding:4.5rem 0 2.2rem;border-top:1px solid var(--border);}
+.sn{font-family:'Special Elite',serif;font-size:.64rem;letter-spacing:.25em;color:var(--accent);display:block;margin-bottom:.55rem;}
+.st{font-size:clamp(2.4rem,4.5vw,4rem);color:var(--text);margin-bottom:.5rem;}
+.sd{font-family:'Special Elite',serif;font-size:.92rem;color:var(--dim);max-width:700px;line-height:1.65;}
+
+.fn{border-left:2px solid var(--accent);padding:.9rem 1.3rem;background:var(--adim);margin:1.8rem 0;font-size:.84rem;color:var(--dim);line-height:1.65;}
+.fn strong{font-family:'Special Elite',serif;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.35rem;}
+.fn.blue{border-color:var(--blue);background:var(--bdim);}
+.fn.blue strong{color:var(--blue);}
+.fn.red{border-color:var(--s0);background:rgba(106,48,88,.08);}
+.fn.red strong{color:var(--s0);}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;margin:2rem 0;}
+.col p{margin-top:.75rem;font-size:.875rem;line-height:1.78;}
+.col p+p{margin-top:.9rem;}
+
+.cl{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.cli{background:var(--bg-card);padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;}
+.cln{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--accent);flex-shrink:0;margin-top:.05rem;}
+.clt{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--text);margin-bottom:.2rem;}
+.cld{font-size:.8rem;color:var(--dim);line-height:1.55;}
+
+.dtw{overflow-x:auto;margin:2rem 0;}
+table.dt{width:100%;border-collapse:collapse;font-size:.85rem;min-width:700px;}
+table.dt th{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.07em;text-align:left;padding:.75rem 1rem;background:var(--bg-card);color:var(--accent);border-bottom:2px solid var(--accent);}
+table.dt td{padding:.72rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;color:var(--dim);}
+table.dt tr:hover td{background:var(--bg-card);}
+.mth{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--text);}
+
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.cc{background:var(--bg-card);padding:1.4rem;transition:background .15s;}
+.cc:hover{background:#1a1a17;}
+.cch{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;}
+.ccn{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:.04em;}
+.sb{display:flex;align-items:flex-end;gap:3px;}
+.sb span{display:block;width:7px;border-radius:1px 1px 0 0;}
+.sb .on{background:currentColor;} .sb .off{background:var(--border);}
+.r4{color:var(--s4);} .r3{color:var(--s3);} .r2{color:var(--s2);} .r1{color:var(--s1);} .r0{color:var(--s0);}
+.ccs{font-family:'Special Elite',serif;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem;display:block;}
+.cci{font-size:.81rem;color:var(--dim);line-height:1.55;margin-bottom:.8rem;}
+.ccm{border-top:1px solid var(--border);padding-top:.7rem;display:flex;flex-direction:column;gap:.32rem;}
+.ccr{display:flex;gap:.6rem;font-size:.78rem;}
+.ccl{font-family:'Special Elite',serif;font-size:.63rem;letter-spacing:.1em;color:var(--muted);width:68px;flex-shrink:0;padding-top:.06rem;}
+.ccv{color:var(--dim);line-height:1.45;}
+.rl{display:flex;gap:2rem;flex-wrap:wrap;padding:.9rem 1.2rem;border:1px solid var(--border);background:var(--bg-card);margin-bottom:1.5rem;align-items:center;}
+.rll{font-family:'Special Elite',serif;font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.rli{font-family:'Special Elite',serif;font-size:.68rem;letter-spacing:.1em;}
+
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.sc{background:var(--bg-card);padding:1.5rem;}
+.sct{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.04em;color:var(--text);margin-bottom:.25rem;}
+.sc ul{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-top:.9rem;}
+.sc li{font-size:.81rem;color:var(--dim);padding-left:1.1rem;position:relative;line-height:1.5;}
+.sc li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:.75rem;}
+
+.satg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.satc{background:var(--bg-card);padding:1.5rem;}
+.satn{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.04em;color:var(--text);margin-bottom:.2rem;}
+.satr{display:flex;justify-content:space-between;font-size:.78rem;padding:.32rem 0;border-bottom:1px solid var(--border);}
+.satr:last-of-type{border-bottom:none;}
+.satrl{font-family:'Special Elite',serif;font-size:.62rem;letter-spacing:.1em;color:var(--muted);flex-shrink:0;margin-right:.75rem;}
+.satrv{color:var(--dim);text-align:right;line-height:1.4;}
+
+.tl{border:1px solid var(--border);margin:2rem 0;}
+.ti{display:grid;grid-template-columns:52px 1fr;border-bottom:1px solid var(--border);}
+.ti:last-child{border-bottom:none;}
+.tn{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.04em;color:var(--accent);background:var(--bg-card);border-right:1px solid var(--border);display:flex;align-items:flex-start;justify-content:center;padding-top:1.25rem;}
+.tb{padding:1.25rem 1.5rem;}
+.tp{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em;color:var(--text);margin-bottom:.4rem;}
+.ts{font-size:.82rem;color:var(--dim);line-height:1.65;}
+
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.pc{background:var(--bg-card);padding:1.5rem;}
+.pr{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:.04em;color:var(--text);margin-bottom:.25rem;}
+.pk{color:var(--blue);margin-bottom:.9rem;}
+.pc ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.pc li{font-size:.81rem;color:var(--dim);padding-left:1.1rem;position:relative;line-height:1.5;}
+.pc li::before{content:'›';position:absolute;left:0;color:var(--blue);}
+
+.gzg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.gzc{background:#0f0f0d;border-left:3px solid var(--s0);padding:1.4rem;}
+.gzn{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.04em;color:var(--text);margin-bottom:.2rem;}
+.gzl{color:var(--s0);margin-bottom:.65rem;}
+.gzd{font-size:.81rem;color:var(--dim);line-height:1.6;}
+
+.og{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2rem 0;}
+.oc{background:var(--bg-card);padding:1.4rem;}
+.ot{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em;color:var(--text);margin-bottom:.25rem;}
+.ol{font-family:'Special Elite',serif;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:.6rem;}
+.la{color:var(--s4);} .lw{color:var(--s2);} .lp{color:var(--s1);}
+.od{font-size:.81rem;color:var(--dim);line-height:1.6;}
+
+.appendix{background:var(--bg-deep);border-top:2px solid var(--s0);padding:5rem 0 4rem;margin-top:2rem;}
+.apw{max-width:1280px;margin:0 auto;padding:0 2rem;}
+.apwarn{font-family:'Special Elite',serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--s0);display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;}
+.apwarn::before{content:'';display:block;width:10px;height:10px;background:var(--s0);border-radius:1px;}
+.apt{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.8rem);color:var(--text);margin-bottom:.55rem;}
+.apd{font-family:'Special Elite',serif;font-size:.88rem;color:var(--muted);max-width:650px;line-height:1.65;}
+.apg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:#1c1c1a;border:1px solid #1c1c1a;margin:2rem 0;}
+.apc{background:#0c0c0b;padding:1.4rem;border-left:2px solid var(--s0);}
+.apct{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em;color:var(--dim);margin-bottom:.35rem;}
+.apc p{font-size:.8rem;color:var(--muted);line-height:1.6;}
+
+footer{max-width:1280px;margin:0 auto;padding:3rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Special Elite',serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.fb{display:flex;align-items:flex-end;gap:4px;}
+.fb span{display:block;width:7px;background:var(--accent);border-radius:1px 1px 0 0;opacity:.45;}
+
+@media(max-width:860px){.two{grid-template-columns:1fr;gap:1.5rem;}table.dt{font-size:.78rem;}table.dt th,table.dt td{padding:.6rem .75rem;}}
+@media(max-width:640px){.nav-links{display:none;}.hero{padding:90px 1.5rem 60px;}.bars-deco{display:none;}.wrap{padding:0 1.5rem;}.sh{padding:3rem 0 1.8rem;}.hero-stats{gap:2rem;}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">COMMS FIELD MANUAL</a>
+    <ul class="nav-links">
+      <li><a href="#pre-dep">Pre-Departure</a></li>
+      <li><a href="#framework">Framework</a></li>
+      <li><a href="#procurement">Procurement</a></li>
+      <li><a href="#esim">eSIM</a></li>
+      <li><a href="#roaming">Roaming</a></li>
+      <li><a href="#wifi">WiFi Calling</a></li>
+      <li><a href="#byc">By Country</a></li>
+      <li><a href="#contingency">Contingency</a></li>
+      <li><a href="#sat">Satellite</a></li>
+      <li><a href="#airports">Airports</a></li>
+      <li><a href="#pros">Professionals</a></li>
+      <li><a href="#triage">Triage</a></li>
+      <li><a href="#gray">Gray Zones</a></li>
+      <li><a href="#opsec">OPSEC</a></li>
+      <li><a href="#appendix">Appendix</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="bars-deco">
+    <span style="height:20px"></span><span style="height:38px"></span>
+    <span style="height:60px"></span><span style="height:86px"></span>
+    <span style="height:118px"></span>
+  </div>
+  <p class="hero-ey">A Comprehensive Reference for Global Connectivity</p>
+  <h1>The Traveler's<br><em>Communications</em><br>Field Manual</h1>
+  <p class="hero-sub">Staying connected anywhere on Earth — from city centers to maritime dead zones, from summit base camps to conflict-adjacent field positions.</p>
+  <div class="hero-rule"></div>
+  <div class="hero-stats">
+    <div class="hstat"><span class="hstat-l">Country Profiles</span><span class="hstat-v">25 Covered</span></div>
+    <div class="hstat"><span class="hstat-l">Reference Sections</span><span class="hstat-v">14 + Appendix</span></div>
+    <div class="hstat"><span class="hstat-l">Audience</span><span class="hstat-v">All Travelers</span></div>
+    <div class="hstat"><span class="hstat-l">Coverage</span><span class="hstat-v">Global</span></div>
+  </div>
+</div>
+
+<!-- ═══ 01. PRE-DEPARTURE ═══ -->
+<section id="pre-dep" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 01 · Before You Leave</span>
+    <h2 class="st">Pre-Departure Checklist</h2>
+    <p class="sd">The decisions made before departure determine your options abroad. Most connectivity failures are entirely preventable with fifteen minutes of preparation at home.</p>
+  </div>
+  <div class="fn">
+    <strong>Primary Rule</strong>
+    Your phone's ability to connect abroad depends on two things: whether it is carrier-unlocked, and whether it supports the frequency bands used at your destination. Both are verifiable before you leave. Everything else is recoverable. These two are not.
+  </div>
+  <div class="cl">
+    <div class="cli"><span class="cln">①</span><div><div class="clt">Verify Your Phone Is Unlocked</div><div class="cld">A carrier-locked phone refuses all foreign SIM cards. Check Settings → Cellular → Carrier, or call your carrier. Phones purchased outright or after a completed contract are typically unlocked. If locked, carriers are legally required to unlock on request in most markets.</div></div></div>
+    <div class="cli"><span class="cln">②</span><div><div class="clt">Check Band Compatibility</div><div class="cld">Not all phones support all frequency bands. A US market device may lack key LTE bands used in Southeast Asia or Australia. Cross-reference your model on GSMArena with your destination's primary 4G/5G bands. A band mismatch means 3G — or worse.</div></div></div>
+    <div class="cli"><span class="cln">③</span><div><div class="clt">Confirm eSIM Capability</div><div class="cld">iPhone XS (2018) and later, plus most flagship Android phones from 2020 onward, support eSIM. The ideal travel setup is dual SIM/eSIM simultaneously: home physical SIM stays active while a travel eSIM runs alongside it for data.</div></div></div>
+    <div class="cli"><span class="cln">④</span><div><div class="clt">Enable WiFi Calling In Advance</div><div class="cld">Many carriers require WiFi Calling to be activated while on their home cellular network before it works abroad. Turn it on now. iPhone: Settings → Phone → Wi-Fi Calling. Android: Settings → Connections → Mobile Networks → Wi-Fi Calling.</div></div></div>
+    <div class="cli"><span class="cln">⑤</span><div><div class="clt">Download Offline Maps</div><div class="cld">GPS positioning works without any cellular connection — satellites are free. What requires data is the map layer. Download destination regions in Google Maps, Maps.me, or OsmAnd before departure. Your GPS never stops; your map does.</div></div></div>
+    <div class="cli"><span class="cln">⑥</span><div><div class="clt">Note Your APN Settings</div><div class="cld">APN (Access Point Name) settings are required to route data on any SIM. Tourist SIMs often push these automatically, but having them documented helps diagnose failures. Find them in Settings → Cellular → Cellular Data Network before you swap anything.</div></div></div>
+    <div class="cli"><span class="cln">⑦</span><div><div class="clt">Back Up Contacts to Cloud</div><div class="cld">Contacts stored on a physical SIM become inaccessible when you swap it. Ensure all contacts are backed up to iCloud, Google, or your carrier account. This matters most when you're swapping SIMs in the back of a taxi from the airport at midnight.</div></div></div>
+    <div class="cli"><span class="cln">⑧</span><div><div class="clt">Pre-Install Essential Apps</div><div class="cld">WhatsApp, Signal, your banking app, your VPN — download and log in before departure. Your VPN especially must be pre-installed and tested in countries that restrict access (China, Iran). Once inside, the App Store may be unavailable or those apps delisted.</div></div></div>
+    <div class="cli"><span class="cln">⑨</span><div><div class="clt">Know Your Carrier's International Rate Structure</div><div class="cld">Understand the cost before you land. Many US carriers offer flat day-pass plans ($10–$15/day) worth activating for short trips. Know the per-MB charge if you don't — a single background sync can be expensive. Set data roaming limits as a financial backstop.</div></div></div>
+    <div class="cli"><span class="cln">⑩</span><div><div class="clt">Pre-Order a Travel eSIM if Applicable</div><div class="cld">eSIMs can be purchased and downloaded before departure, then activated on landing. Local carrier eSIMs — bought directly from destination country carriers — deliver better value and performance than global aggregators in most markets. Research availability before defaulting to a reseller.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 02. FRAMEWORK ═══ -->
+<section id="framework" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 02 · The Decision Framework</span>
+    <h2 class="st">Roam, Local SIM, or eSIM</h2>
+    <p class="sd">Three paths, each with specific conditions that make it the right choice. The wrong default costs money. The right one is invisible.</p>
+  </div>
+  <div class="dtw">
+    <table class="dt">
+      <thead><tr>
+        <th style="width:18%">Method</th>
+        <th style="width:22%">Use When</th>
+        <th style="width:22%">Avoid When</th>
+        <th style="width:15%">Typical Cost</th>
+        <th style="width:23%">Core Tradeoff</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="mth">Roam on Home Carrier</span></td>
+          <td>Trip under 3 days; employer paying; home number must stay active; carrier offers a flat day-pass rate</td>
+          <td>Trips over a week; budget travel; data-heavy use; countries with weak roaming partner networks</td>
+          <td>$10–$15/day (US carriers); varies internationally</td>
+          <td>Maximum convenience, minimum value. You keep your number; you lose your budget.</td>
+        </tr>
+        <tr>
+          <td><span class="mth">Local Physical SIM</span></td>
+          <td>Single-country trips over 5 days; data-heavy use; cost-sensitive travel; countries with cheap local networks (India, Thailand, Vietnam)</td>
+          <td>Multi-country trips; complex SIM registration markets; when home number must stay simultaneously active</td>
+          <td>$5–$30 for 7–30-day plans with generous data</td>
+          <td>Best local value and network quality. Requires a SIM swap and temporary loss of home number.</td>
+        </tr>
+        <tr>
+          <td><span class="mth">Global Aggregator eSIM</span></td>
+          <td>Multi-country trips; home SIM must stay active; markets where local SIM procurement is onerous</td>
+          <td>Markets with superior local carrier eSIMs; budget travel; any destination with excellent, cheap local SIMs</td>
+          <td>$15–$60 for multi-country plans</td>
+          <td>High convenience, middle-tier value. Usually better than roaming; rarely as good as a quality local SIM.</td>
+        </tr>
+        <tr>
+          <td><span class="mth">Local Carrier eSIM</span></td>
+          <td>Destination carrier offers direct eSIM sales (Japan, South Korea, UAE, Singapore, most of Europe); you want local SIM value without the physical swap</td>
+          <td>Markets requiring in-person identity verification for eSIM; phones without eSIM support</td>
+          <td>Equivalent to local physical SIM — excellent value</td>
+          <td>The best of both worlds when available: local pricing, direct carrier quality, remote activation. Always check before using an aggregator.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fn blue">
+    <strong>The Dual-SIM Advantage</strong>
+    Running a physical SIM alongside an eSIM simultaneously is the ideal travel configuration. Your home number stays live on the physical SIM — banks reach you with SMS verification codes, family calls your normal number — while a local or regional eSIM handles data at local rates. This costs nothing extra and eliminates the biggest connectivity compromise travelers make.
+  </div>
+</div>
+</section>
+
+<!-- ═══ 03. PROCUREMENT ═══ -->
+<section id="procurement" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 03 · SIM Procurement Tradecraft</span>
+    <h2 class="st">Where and How to Acquire</h2>
+    <p class="sd">Where you buy a local SIM matters as much as which one you buy. The airport kiosk is not your only option — and is rarely your best one.</p>
+  </div>
+  <div class="two">
+    <div class="col">
+      <span class="kicker">Airport Kiosks</span>
+      <p>Convenient, reliably available, consistently overpriced. Airport SIM vendors charge 20–40% above street price for equivalent plans. That premium buys one thing: a working SIM before you clear arrivals. On a short trip or a midnight landing, this is often the correct call. Most major international airports have dedicated telecom kiosks in the arrivals hall; staff speak enough English to assist. In Asia, airport tourist SIM packages often include extras — transit credits, attraction discounts — that partially offset the premium.</p>
+    </div>
+    <div class="col">
+      <span class="kicker">Carrier Flagship Stores</span>
+      <p>The best value and most capable service, with one catch: you need to get there first. Flagship stores offer the full plan range, handle complex registrations, and can troubleshoot problems. Staff in most major markets speak sufficient English. Bring your passport — virtually every country now requires identity verification for SIM purchase, a near-universal response to counter-terrorism legislation. Processing time is typically 5–15 minutes. For any stay over three days, the extra effort is worth it.</p>
+    </div>
+  </div>
+  <div class="two">
+    <div class="col">
+      <span class="kicker">Convenience Stores</span>
+      <p>In Thailand, Japan, South Korea, and across Southeast Asia, major carrier SIMs are sold at 7-Eleven and FamilyMart at the same price as carrier stores. The SIM is pre-configured; activation happens via app or first-boot SMS. This is frequently the most efficient option: 24-hour availability, no language barrier, full plan selection. A 7-Eleven tourist SIM in Bangkok at 2am is a legitimate, fully capable piece of telecommunications infrastructure.</p>
+    </div>
+    <div class="col">
+      <span class="kicker">Pre-Ordered eSIM</span>
+      <p>The increasingly dominant option for prepared travelers. Purchase before departure, receive a QR code, activate upon arrival over any WiFi connection. No hunting, no negotiation. Local carrier eSIMs — purchased directly from carriers like NTT Docomo, SKT, or Telkomsel — consistently outperform aggregators on price and network performance. The rule is simple: if your destination carrier sells eSIMs directly, use them over a reseller. Check before you book the aggregator.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 04. eSIM ═══ -->
+<section id="esim" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 04 · The Embedded SIM</span>
+    <h2 class="st">eSIM: The New Standard</h2>
+    <p class="sd">The embedded SIM is rewriting international travel connectivity. Understanding how it works — and its genuine limitations — separates the prepared traveler from the frustrated one.</p>
+  </div>
+  <div class="two">
+    <div class="col">
+      <span class="kicker">How It Works</span>
+      <p>An eSIM is a chip soldered into your device that stores multiple carrier profiles simultaneously. Instead of swapping a physical card, you scan a QR code to download a carrier's authentication profile over the air. Modern devices support 5–20 stored profiles, though only one or two can be active at a time.</p>
+      <p>The enabling technology is GSMA's Remote SIM Provisioning standard. This is what makes purchasing a Japanese carrier data plan from home in Washington before flying to Tokyo not only possible but routine. The profile sits dormant until activated at the destination — no airport stop required.</p>
+    </div>
+    <div class="col">
+      <span class="kicker">Aggregators vs. Local Carriers</span>
+      <p>Global aggregators resell carrier data bundled across multiple countries. The convenience is genuine. The tradeoffs are too: aggregators typically resell MVNO-tier capacity, delivering lower speeds and lower priority during congestion compared to direct carrier customers.</p>
+      <p>When a destination carrier sells eSIMs directly — Japan, South Korea, UAE, Singapore, most of Europe, and a rapidly expanding list — that is almost always the better option. Local SIM pricing, direct network access, remote activation. Check before you default to an aggregator. The fifteen minutes of research consistently pays off.</p>
+    </div>
+  </div>
+  <div class="fn">
+    <strong>Three Checks Before Any eSIM Purchase</strong>
+    (1) Confirm your device is eSIM-capable — check the manufacturer spec sheet. (2) Confirm your device is not eSIM-locked — some budget Android handsets sold by US carriers lock the eSIM slot to that carrier, blocking all third-party profiles. (3) Confirm the eSIM covers your specific destinations, not just the country's major cities — aggregators rarely disclose which partner network they're actually using, and rural coverage varies dramatically between carriers within the same country.
+  </div>
+  <div class="fn blue">
+    <strong>The Stored Profile Advantage</strong>
+    Frequent travelers to the same destinations should keep those country profiles stored and ready. Reactivation is instant — no repurchase, no QR code scan, no app launch. Build a library of profiles for your five most-visited countries. There is no cost to a dormant profile; only to activating data on it.
+  </div>
+</div>
+</section>
+
+<!-- ═══ 05. ROAMING ═══ -->
+<section id="roaming" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 05 · The Invisible Infrastructure</span>
+    <h2 class="st">How Roaming Actually Works</h2>
+    <p class="sd">When your phone lands abroad, a cascade of invisible handshakes takes place in milliseconds. Understanding this explains most of the frustrating things that happen to travelers.</p>
+  </div>
+  <div class="two">
+    <div class="col">
+      <span class="kicker">The Moment You Land</span>
+      <p>Disable airplane mode and your phone immediately broadcasts its identity to every visible network. Foreign networks read your IMSI — the unique identifier in your SIM — and check whether your home carrier holds a roaming agreement with them. If yes, your phone registers as a visitor. Your home carrier is notified. Calls and data transit the foreign network, are billed to your home carrier, who bills you.</p>
+      <p>This is why two or three network names flash across your status bar on arrival. Your phone is auditing available networks and selecting the one your home carrier has designated as preferred — which may not be the best available network in that country.</p>
+    </div>
+    <div class="col">
+      <span class="kicker">Why Roaming Disappoints</span>
+      <p>Roaming quality depends entirely on the partnership your home carrier has negotiated — not on local network quality in general. Your carrier may route you to a preferred partner that is the second-best network in the country, has limited rural coverage, or runs congested infrastructure in tourist areas.</p>
+      <p>Roaming subscribers are also typically lower priority than local subscribers on the same tower. In crowded areas — airports, tourist sites, event venues — roaming travelers experience data slowdowns while locals maintain speed. A local SIM eliminates this distinction: you become a local subscriber. This factor alone often justifies getting a local SIM even on short trips to high-density destinations.</p>
+    </div>
+  </div>
+  <div class="fn">
+    <strong>Manual Network Selection</strong>
+    Most smartphones allow manual network selection: Settings → Cellular → Network Selection → Manual. In countries with multiple operators, selecting the best available carrier — rather than accepting your home carrier's assignment — can substantially improve performance. Research the leading carrier at your destination before departure and select it manually on arrival. This overrides your carrier's preferred roaming partner. Worth the 30 seconds it takes.
+  </div>
+</div>
+</section>
+
+<!-- ═══ 06. WIFI CALLING ═══ -->
+<section id="wifi" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 06 · The Underrated Tool</span>
+    <h2 class="st">WiFi Calling</h2>
+    <p class="sd">The most underused tool in international travel. When enabled correctly, WiFi Calling lets you make and receive calls on your home number from anywhere with a WiFi connection — at no additional charge.</p>
+  </div>
+  <div class="two">
+    <div class="col">
+      <span class="kicker">What It Does</span>
+      <p>WiFi Calling routes voice calls and SMS through an internet connection rather than a cellular network. Your phone dials normally; the signal travels over WiFi to your carrier's servers, then exits as a standard call. The person you're calling sees your regular number. To everyone involved, you appear to be calling from home.</p>
+      <p>For incoming calls, the reverse: callers dial your normal number, it rings on your device over WiFi regardless of your physical location. If you're in a guesthouse in Chiang Mai, your parents can reach you at your regular number with a domestic call. You pay nothing extra. They pay nothing extra. The infrastructure handles everything invisibly.</p>
+    </div>
+    <div class="col">
+      <span class="kicker">The Combination Strategy</span>
+      <p>Experienced travelers layer WiFi Calling onto a local data SIM. The local SIM handles data and local calling at local rates. WiFi Calling maintains home number accessibility for calls to and from home contacts — at zero incremental cost. This combination covers virtually all international communication needs without roaming charges.</p>
+      <p>The setup requires one thing done at home first: WiFi Calling must be enabled while on your home carrier's cellular network before it works abroad. Turn it on now. Some carriers also require an emergency address registration before activation. Complete both steps before you need them.</p>
+    </div>
+  </div>
+  <div class="fn">
+    <strong>Known Limitations</strong>
+    WiFi Calling does not function in China, where foreign VoIP infrastructure is blocked at the network level. Some hotel and corporate networks block the UDP ports it requires — if calls fail on hotel WiFi, try a mobile hotspot from a local SIM. Emergency calls via WiFi Calling use your registered emergency address from home, not your physical location abroad. When you need local emergency services, use local emergency numbers — not WiFi Calling.
+  </div>
+</div>
+</section>
+
+<!-- ═══ 07. BY COUNTRY ═══ -->
+<section id="byc" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 07 · Global Reference</span>
+    <h2 class="st">Network Quality Around the World</h2>
+    <p class="sd">25 curated country profiles covering the most-traveled destinations and the most instructive cases. Ratings reflect practical traveler utility, not theoretical peak speeds.</p>
+  </div>
+  <div class="rl">
+    <span class="rll">Signal Rating:</span>
+    <span class="rli r4">████ Field-Ready</span>
+    <span class="rli r3">███░ Solid</span>
+    <span class="rli r2">██░░ Spotty</span>
+    <span class="rli r1">█░░░ Challenging</span>
+    <span class="rli r0">░░░░ Restricted</span>
+  </div>
+  <div class="cg">
+
+    <div class="cc"><div class="cch"><div class="ccn r4">South Korea</div><div class="sb r4"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="on"></span></div></div><span class="ccs r4">Field-Ready · World Standard</span><p class="cci">By most global benchmarks, the best mobile network on Earth. 5G extends beyond Seoul into rural corridors, ferry routes, and subway tunnels. The benchmark against which other countries are measured.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Direct carrier eSIM (SKT, KT, LG U+); tourist SIMs at Incheon are professional-grade</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Nothing notable. This is the ceiling.</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r4">Japan</div><div class="sb r4"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="on"></span></div></div><span class="ccs r4">Field-Ready · Exceptional</span><p class="cci">NTT Docomo, SoftBank, and au run world-class networks. Direct tourist eSIM purchase from major carriers is now possible without in-store registration. Reliable into rural areas and coastal routes.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Direct carrier eSIM preferred; tourist SIM at Narita/Haneda is a reliable fallback</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Brief gaps on some Shinkansen routes; eSIM registration now streamlined for tourists</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r4">Singapore</div><div class="sb r4"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="on"></span></div></div><span class="ccs r4">Field-Ready · Total Coverage</span><p class="cci">City-state geography eliminates rural gaps. Three competing carriers (Singtel, StarHub, M1) drive strong performance. Changi Airport runs one of the world's most transparent and well-organized SIM kiosk setups.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Local SIM or eSIM — both work without compromise; Changi arrivals kiosks are unusually fair on pricing</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Nothing. Singapore works.</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r4">UAE</div><div class="sb r4"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="on"></span></div></div><span class="ccs r4">Field-Ready · VoIP Caveat</span><p class="cci">Etisalat (e&) and du run world-class infrastructure in Dubai and Abu Dhabi, with better-than-expected desert coverage. The critical caveat: WhatsApp calls, FaceTime Audio, and Skype are officially restricted.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Local SIM or eSIM; tourist SIMs at DXB and AUH are good quality</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">VoIP calls blocked; cellular calls and SMS work fine; VPN use legally gray for individuals</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">India</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Remarkable Transformation</span><p class="cci">Reliance Jio's 2016 market entry transformed India from connectivity scarcity to abundance. Major cities have strong 4G/5G at some of the cheapest data rates globally. Tourist SIM registration involves specific documentation that trips up unprepared visitors.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Global aggregator eSIM is the pragmatic tourist choice; local SIM value is exceptional but registration friction is real</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Specific tourist registration requirements; remote Himalayan regions and tribal areas have genuine gaps</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Thailand</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · The Traveler's Benchmark</span><p class="cci">One of the easiest countries in the world to get a working SIM at a fair price. Tourist packages from AIS and True are sold at every 7-Eleven at rates that make roaming charges feel absurd by comparison.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Local SIM at any 7-Eleven — bring passport, 10 minutes, extraordinary value</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Northern hill country and remote islands have gaps; 7-Eleven SIMs require brief online activation</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Vietnam</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Strong Urban, Variable Rural</span><p class="cci">Viettel's state backing gives it the broadest national coverage including rural reach private carriers don't match. Ho Chi Minh City and Hanoi are excellent. Ha Long Bay and northern highlands are patchier.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Viettel tourist SIM at Noi Bai or Tan Son Nhat airport is the standard call</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Facebook and Google intermittently throttled during political events; VPN recommended</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">Indonesia</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Geography Dependent</span><p class="cci">An archipelago of 17,000 islands makes uniform coverage structurally impossible. Java and Bali are excellent. Outer islands range from adequate to non-existent. Telkomsel is the only carrier with meaningful reach beyond the main islands.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Telkomsel for coverage; XL or Indosat for Java/Bali on budget</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Komodo, Raja Ampat, remote Sulawesi: significant gaps — plan satellite for multi-day island stays</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">China</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid Infrastructure · Firewall Complication</span><p class="cci">The physical network is world-class — 5G deployed at extraordinary scale, dense in cities and complete in most rural areas. The complication is what the network carries: Google, WhatsApp, Instagram, and most Western services are blocked at the infrastructure level.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Foreign SIM roaming data bypasses the Firewall — a legitimate reason to pay roaming rates for short visits</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">VPN must be installed before entry — App Store and Google Play are blocked inside China</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">Germany</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Western Europe's Weak Link</span><p class="cci">Germany's mobile infrastructure is counterintuitively one of Western Europe's worst. Rural coverage gaps are extensive and major Deutsche Bahn intercity routes are notoriously plagued by dead zones — a structural failure regulators have pushed carriers to address with limited success.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Telekom for best coverage; O2 and Vodafone adequate in cities</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Plan for dead zones on train journeys; rural Bavaria and eastern Germany are genuinely patchy</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">United Kingdom</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Good Urban, Rural Gaps</span><p class="cci">London and major cities have strong coverage from EE, Vodafone, Three, and O2. Rural Wales, the Scottish Highlands, and remote English countryside have significant gaps. EE holds the best rural coverage in England.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">EE for coverage; Three for budget; all major carriers now offer eSIM</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Post-Brexit: EU SIMs no longer include free UK roaming — factor this into combined Europe/UK trips</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">France</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Urban Strength, Rural Variance</span><p class="cci">Paris has excellent, competitive coverage from Orange, SFR, Bouygues, and Free. Rural France — particularly the Massif Central and certain Alpine valleys — has notable gaps. EU travelers benefit from free roaming across France from any EU SIM.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Orange for coverage; Free Mobile for value; any EU SIM roams freely</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Rural Brittany, Auvergne, and southern Alps have genuine dead zones</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Iceland</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Impressive Remote Coverage</span><p class="cci">Impressive network for a country of 370,000 people. Siminn and Nova cover the Ring Road almost completely. The highland F-roads and true wilderness are dead zones — but the entire main tourist circuit is reliably served.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Siminn for broadest coverage; tourist SIMs at Keflavik and Reykjavik</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Highland interior has no coverage — bring a satellite messenger for remote excursions</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">United States</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Urban Excellence, Rural Failure</span><p class="cci">New York, LA, Chicago: world-class. A stretch of Wyoming highway: entirely off-grid. The US has some of the best urban networks and some of the most notorious rural dead zones in the developed world. Geography and scale are the cause; carrier economics do the rest.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">T-Mobile has the best overall coverage map post-Sprint merger; Verizon strongest in rural East</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Most National Parks have no coverage; large swaths of the rural West are genuinely off-grid</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Mexico</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Telcel Dominant</span><p class="cci">Telcel's market dominance (via América Móvil) translates to broad coverage across CDMX, resort corridors, and major highways. Cancún, Los Cabos, and Puerto Vallarta are well-served. US T-Mobile subscribers have included Mexico data.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Telcel for coverage; AT&T México for budget; US T-Mobile plans often include Mexico</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Deep Oaxacan mountains and the Copper Canyon have genuine gaps; border zones can trigger cross-roaming</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">Brazil</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Extremes in Scale</span><p class="cci">São Paulo and Rio are sophisticated, well-connected cities. The Amazon basin is one of the world's largest connectivity dead zones — vast jungle with satellite as the only option. The gap between coastal Brazil and interior Brazil is among the world's starkest.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Claro or Vivo for urban/coastal; satellite planning mandatory for any Amazon travel</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Amazon river and interior ecotourism: assume zero cellular coverage</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Kenya</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Africa's Reference Standard</span><p class="cci">Safaricom is a continental benchmark. Nairobi, Mombasa, and main tourist corridors are genuinely excellent. M-Pesa has made mobile the primary financial infrastructure — connectivity carries a different cultural weight here than almost anywhere else.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Safaricom is the unambiguous first choice — market dominance maps directly to coverage dominance</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Remote safari conservancies and the far north (Turkana, Samburu) have limited or no coverage</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">South Africa</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Loadshedding Wild Card</span><p class="cci">MTN and Vodacom deliver solid urban coverage in Cape Town, Johannesburg, and Durban. The complicating factor unique to South Africa: rolling electricity blackouts (load-shedding) affect tower power and cause sudden coverage drops even in well-served areas.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Vodacom for stability; tourist SIMs at OR Tambo and Cape Town International</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Load-shedding schedules affect tower reliability unpredictably; have offline backup plans</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Morocco</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Tourist Corridor Coverage</span><p class="cci">Maroc Telecom (IAM), Orange Maroc, and Inwi provide competitive coverage across Casablanca, Marrakech, Fez, and main tourist routes. The Sahara south of Ouarzazate and deep Rif Mountains are the genuine gaps. SIM procurement is straightforward.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Maroc Telecom for coverage; tourist SIMs at airports and medina shops</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Erg Chebbi dunes and remote Atlas passes have genuine gaps; VoIP historically throttled during protests</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Egypt</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Nile Corridor Coverage</span><p class="cci">Cairo, Alexandria, the Nile Valley tourist corridor (Luxor, Aswan), and Red Sea resorts are well-served. The Western Desert, Sinai interior, and parts of the Eastern Desert have significant gaps. Social media has been blocked during political events.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Vodafone Egypt for coverage; tourist SIMs at Cairo International</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Deep Sinai and Western Desert genuinely off-grid; VPN recommended for resilient platform access</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">Nepal</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Altitude Dependent</span><p class="cci">Kathmandu and Pokhara have good coverage. Remarkably, Everest Base Camp (5,364m) now has 5G — installed by Ncell for expedition publicity. The trekking trails between waypoints are another story: patchy, often absent, entirely dependent on which valley and altitude you occupy.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Ncell for broadest coverage; tourist SIM at Tribhuvan International</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Annapurna, Langtang, and off-main-trail trekking: satellite messenger is non-negotiable</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r1">Cuba</div><div class="sb r1"><span style="height:8px" class="on"></span><span style="height:13px" class="off"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r1">Challenging · Plan for Offline-First</span><p class="cci">ETECSA holds a state monopoly on all telecommunications. Mobile data exists but is slow, expensive by local standards, and inconsistent. WiFi access is sold via NAUTA cards at designated hotspots — parks, hotel lobbies, select street corners. Plan as if you won't have reliable internet.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Foreign SIMs roam on ETECSA at high rates; NAUTA WiFi cards for data; download everything before arrival</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">One of the most difficult connectivity environments in the hemisphere. Notify contacts you will be largely unreachable. Bring cash — card infrastructure is also limited.</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r2">Philippines</div><div class="sb r2"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="off"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r2">Spotty · Archipelago Reality</span><p class="cci">Competition between Globe and Smart has improved Manila and major Visayas cities to solid coverage. The 7,000+ islands make uniform coverage structurally impossible. Typhoons routinely damage infrastructure — connectivity after major storms can be disrupted across entire provinces.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Globe or Smart in major cities; DITO gaining ground in urban areas</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Remote islands (Batanes, far Palawan) have minimal coverage; typhoon season (June–November) can disrupt infrastructure</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Italy</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Better Than Expected</span><p class="cci">Italy often surprises travelers with solid coverage. TIM and WindTre have invested significantly in network quality. Major tourist corridors are well-served. Alpine regions, Sardinia's interior, and remote Apennine villages are the exceptions.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">TIM for coverage; WindTre for value; Iliad for budget with decent urban coverage</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Dolomites and remote Sardinia/Sicily interiors have gaps; any EU SIM roams freely</span></div></div></div>
+
+    <div class="cc"><div class="cch"><div class="ccn r3">Spain</div><div class="sb r3"><span style="height:8px" class="on"></span><span style="height:13px" class="on"></span><span style="height:19px" class="on"></span><span style="height:26px" class="off"></span></div></div><span class="ccs r3">Solid · Tourist-Ready</span><p class="cci">Movistar, Orange, and Vodafone provide strong coverage across the peninsula. Barcelona, Madrid, Seville, and coastal resort areas are well-served. Tourist eSIM options are plentiful and competitively priced, reflecting Spain's tourism-dependent economy.</p><div class="ccm"><div class="ccr"><span class="ccl">Approach</span><span class="ccv">Any major carrier works in tourist areas; eSIM from local carriers is excellent value</span></div><div class="ccr"><span class="ccl">Watch</span><span class="ccv">Extremadura, inland Aragon, and Pyrenean villages can be patchy; any EU SIM roams freely</span></div></div></div>
+
+  </div><!-- /country-grid -->
+</div>
+</section>
+
+<!-- ═══ 08. CONTINGENCY ═══ -->
+<section id="contingency" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 08 · Destination-Type Planning</span>
+    <h2 class="st">Contingency Plans by Destination Type</h2>
+    <p class="sd">The connectivity strategy that works in central Paris fails in the Patagonian steppe. Each environment demands a different communications posture.</p>
+  </div>
+  <div class="sg">
+    <div class="sc"><span class="kicker">Environment 01</span><div class="sct">Major Metropolitan Hub</div><ul><li>Assume connectivity — plan for multiple options, not one</li><li>eSIM plus WiFi Calling covers 95% of needs without thought</li><li>Local SIM optimal for stays over five days</li><li>Airport eSIM activation is the cleanest arrival routine</li><li>Multiple cafes and public WiFi as standard backup</li><li>iMessage, WhatsApp, and Telegram all fully reliable</li></ul></div>
+    <div class="sc"><span class="kicker">Environment 02</span><div class="sct">Beach Resort</div><ul><li>Resort WiFi is primary — often the best local connection</li><li>Local SIM essential for any time spent off-resort</li><li>Offshore activities: signal dies beyond roughly 10–15km</li><li>Boat charters and snorkeling trips: assume no signal; plan accordingly</li><li>Download entertainment and offline maps before excursions</li><li>Satellite messenger for any multi-day maritime activity</li></ul></div>
+    <div class="sc"><span class="kicker">Environment 03</span><div class="sct">Remote / Rural</div><ul><li>Research coverage maps for your specific route before departure</li><li>Identify the carrier with best rural reach in the country</li><li>Satellite messenger is mandatory for multi-day backcountry</li><li>Download offline maps, accommodation details, emergency contacts before leaving coverage</li><li>Share your itinerary with a contact at home; establish a check-in schedule</li><li>No signal means your phone searches constantly — battery drains 30–50% faster</li></ul></div>
+    <div class="sc"><span class="kicker">Environment 04</span><div class="sct">Maritime / Open Water</div><ul><li>Cellular ends reliably at 20–30 nautical miles from shore</li><li>Coastal sailing: SSB radio plus AIS plus cellular in port</li><li>Offshore passage: Starlink or Iridium, no exceptions</li><li>EPIRB is a rescue trigger, not a communications device — know the difference</li><li>Inmarsat BGAN for professional-grade satellite broadband</li><li>Marina WiFi at each stop is often better than expected; plan for it</li></ul></div>
+    <div class="sc"><span class="kicker">Environment 05</span><div class="sct">High Altitude / Mountain</div><ul><li>Major trekking routes (Everest, Annapurna, Kilimanjaro) have coverage at key waypoints</li><li>Coverage drops precipitously off established trails</li><li>Cold weather degrades battery life 30–50% — carry extra power banks</li><li>Satellite messenger is insurance, not primary communications</li><li>Ham/shortwave radio among serious expedition teams</li><li>Download weather apps and forecasts before final ascent to altitude</li></ul></div>
+    <div class="sc"><span class="kicker">Environment 06</span><div class="sct">Conflict-Adjacent</div><ul><li>Infrastructure may be targeted — plan for multiple carrier options</li><li>Two physical SIMs from different carriers plus satellite backup</li><li>Encrypted communications (Signal) for sensitive coordination by default</li><li>Share a communications check-in schedule with editor, family, or emergency contact</li><li>Local journalist and fixer networks have the best-in-country SIM knowledge</li><li>Never rely on a single point of communications failure</li></ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 09. SATELLITE ═══ -->
+<section id="sat" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 09 · Beyond the Cellular Perimeter</span>
+    <h2 class="st">Satellite Communications</h2>
+    <p class="sd">When the last cell tower is a day's drive behind you, the only signal that matters comes from overhead. The satellite communications landscape has changed dramatically in the past five years.</p>
+  </div>
+  <div class="fn">
+    <strong>The Three Device Types</strong>
+    Satellite devices divide into three categories with very different capabilities: satellite phones (self-contained voice and data), satellite hotspots or terminals (data only, enables your smartphone via WiFi), and satellite messengers (SOS plus limited two-way text messaging only). Know which category you need before purchase — the right tool depends entirely on whether you need voice, data, or just emergency contact.
+  </div>
+  <div class="satg">
+    <div class="satc"><div class="satn">Starlink</div><span class="kicker" style="margin-bottom:.9rem">LEO Broadband · Portable / Maritime / RV</span>
+      <div class="satr"><span class="satrl">Coverage</span><span class="satrv">Global (polar coverage limited)</span></div>
+      <div class="satr"><span class="satrl">Speed</span><span class="satrv">20–200 Mbps — genuinely fast</span></div>
+      <div class="satr"><span class="satrl">Hardware</span><span class="satrv">Compact flat antenna (~30cm); not pocket-sized</span></div>
+      <div class="satr"><span class="satrl">Cost</span><span class="satrv">$50–$250/month; hardware $250–$599</span></div>
+      <div class="satr"><span class="satrl">Best For</span><span class="satrv">Maritime, overlanding, remote camps, basecamp internet</span></div>
+      <div class="satr"><span class="satrl">Limitation</span><span class="satrv">Requires power; not suited for hiking; setup time</span></div>
+    </div>
+    <div class="satc"><div class="satn">Iridium</div><span class="kicker" style="margin-bottom:.9rem">LEO Network · True Global Coverage</span>
+      <div class="satr"><span class="satrl">Coverage</span><span class="satrv">Entire Earth including poles — the only network that does</span></div>
+      <div class="satr"><span class="satrl">Speed</span><span class="satrv">2.4–28 kbps; Iridium GO! enables smartphone</span></div>
+      <div class="satr"><span class="satrl">Hardware</span><span class="satrv">Iridium Extreme handset; GO! hotspot device</span></div>
+      <div class="satr"><span class="satrl">Cost</span><span class="satrv">$0.80–$1.50/min voice; SOS-only plans from $15/month</span></div>
+      <div class="satr"><span class="satrl">Best For</span><span class="satrv">Polar expeditions, maritime, any environment no other system reaches</span></div>
+      <div class="satr"><span class="satrl">Limitation</span><span class="satrv">Slow data; tolerable voice quality; hardware is dated</span></div>
+    </div>
+    <div class="satc"><div class="satn">Garmin inReach</div><span class="kicker" style="margin-bottom:.9rem">Iridium-Based · Satellite Messenger</span>
+      <div class="satr"><span class="satrl">Coverage</span><span class="satrv">Global via Iridium constellation</span></div>
+      <div class="satr"><span class="satrl">Speed</span><span class="satrv">SMS-length messages only; no voice or streaming data</span></div>
+      <div class="satr"><span class="satrl">Hardware</span><span class="satrv">Pocket-sized; standalone or pairs with Garmin GPS</span></div>
+      <div class="satr"><span class="satrl">Cost</span><span class="satrv">From $14.95/month; 10 messages included</span></div>
+      <div class="satr"><span class="satrl">Best For</span><span class="satrv">Hikers, trekkers, cyclists — emergency contact plus two-way messaging</span></div>
+      <div class="satr"><span class="satrl">Limitation</span><span class="satrv">Not a phone; no voice; limited to short messages and SOS</span></div>
+    </div>
+    <div class="satc"><div class="satn">Thuraya</div><span class="kicker" style="margin-bottom:.9rem">GEO Satellite · Regional Leader</span>
+      <div class="satr"><span class="satrl">Coverage</span><span class="satrv">Middle East, Africa, Asia, Europe — not Americas or Pacific</span></div>
+      <div class="satr"><span class="satrl">Speed</span><span class="satrv">Voice plus 60–444 kbps data — better than Iridium for data</span></div>
+      <div class="satr"><span class="satrl">Hardware</span><span class="satrv">X5-Touch handset; SatSleeve accessory for iPhone</span></div>
+      <div class="satr"><span class="satrl">Cost</span><span class="satrv">$0.55–$1.00/minute; per-MB data pricing</span></div>
+      <div class="satr"><span class="satrl">Best For</span><span class="satrv">Aid workers, journalists, contractors in MENA and Africa</span></div>
+      <div class="satr"><span class="satrl">Limitation</span><span class="satrv">Regional only — verify specific destination before purchasing</span></div>
+    </div>
+    <div class="satc"><div class="satn">Inmarsat BGAN</div><span class="kicker" style="margin-bottom:.9rem">GEO Satellite · Professional Broadband</span>
+      <div class="satr"><span class="satrl">Coverage</span><span class="satrv">Near-global (±75° latitude)</span></div>
+      <div class="satr"><span class="satrl">Speed</span><span class="satrv">Up to 492 kbps; streaming 32–256 kbps</span></div>
+      <div class="satr"><span class="satrl">Hardware</span><span class="satrv">Portable terminal; laptop-sized case; line-of-sight required</span></div>
+      <div class="satr"><span class="satrl">Cost</span><span class="satrv">Professional pricing — rental most practical for travelers</span></div>
+      <div class="satr"><span class="satrl">Best For</span><span class="satrv">TV news crews, military contractors, humanitarian response</span></div>
+      <div class="satr"><span class="satrl">Limitation</span><span class="satrv">Expensive, bulky — the professional standard, not a consumer product</span></div>
+    </div>
+    <div class="satc"><div class="satn">SPOT / Globalstar</div><span class="kicker" style="margin-bottom:.9rem">Globalstar-Based · Budget SOS</span>
+      <div class="satr"><span class="satrl">Coverage</span><span class="satrv">Regional — Globalstar has coverage gaps at high latitudes</span></div>
+      <div class="satr"><span class="satrl">Speed</span><span class="satrv">One-way tracking and SOS only (SPOT Gen4); no two-way</span></div>
+      <div class="satr"><span class="satrl">Hardware</span><span class="satrv">Very compact; clip-on form factor</span></div>
+      <div class="satr"><span class="satrl">Cost</span><span class="satrv">From $11.95/month — the budget satellite option</span></div>
+      <div class="satr"><span class="satrl">Best For</span><span class="satrv">Casual hikers wanting SOS at minimum cost</span></div>
+      <div class="satr"><span class="satrl">Limitation</span><span class="satrv">No two-way messaging; cannot confirm SOS received; coverage gaps at polar latitudes</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 10. AIRPORTS ═══ -->
+<section id="airports" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 10 · Transit Environments</span>
+    <h2 class="st">Airport &amp; Transit Connectivity</h2>
+    <p class="sd">Airports are the first and last connectivity environment of every international trip. Knowing what to expect — and where the real options are — converts a stressful layover into a productive one.</p>
+  </div>
+  <div class="two">
+    <div class="col">
+      <span class="kicker">Airport WiFi: The Honest Assessment</span>
+      <p>Free airport WiFi is available at virtually every major international hub, but quality varies enormously. Changi (Singapore), Incheon (Seoul), and Hamad (Doha) offer genuinely fast, stable connections. Most US airports range from tolerable to frustrating. Heathrow is functional. Charles de Gaulle historically inconsistent. For anything sensitive, treat open airport WiFi as a hostile network — use a VPN. For sensitive data, your mobile hotspot is more trustworthy than any open network.</p>
+      <span class="kicker" style="margin-top:1.5rem">The Lounge Advantage</span>
+      <p>Business lounges consistently offer the most reliable WiFi in any airport. User density is lower, bandwidth often dedicated, and power outlets actually available. For long layovers with work to do, a day-pass to a Priority Pass lounge is frequently worth the cost based on connectivity alone. Premium travel cards (Chase Sapphire Reserve, Amex Platinum) include Priority Pass membership.</p>
+    </div>
+    <div class="col">
+      <span class="kicker">SIM Shops in Arrivals</span>
+      <p>Every major international airport has telecom retail in arrivals. Quality and pricing vary — Incheon Airport's SIM kiosks are notably transparent and professionally run, with multiple carriers competing openly. JFK and LAX have adequate options. Airports in the Middle East and Asia often have kiosks directly at the corridor before customs clearance — the most convenient possible intervention point.</p>
+      <span class="kicker" style="margin-top:1.5rem">In-Flight Connectivity</span>
+      <p>In-flight WiFi has improved substantially. European carriers (Lufthansa, British Airways) offer capable satellite-based internet on long-haul routes. Delta's Viasat service is among the better US options. Expect 2–10 Mbps on a good day. Cellular on European domestic flights is available via some carriers under EU regulations. Connectivity at altitude is now unremarkable on certain routes — plan accordingly.</p>
+      <span class="kicker" style="margin-top:1.5rem">High-Speed Rail</span>
+      <p>Train WiFi is inconsistent. The Shinkansen and Korea's KTX offer acceptable onboard service. Eurostar is functional; most European high-speed rail is variable. Plan to rely on a local SIM hotspot rather than train WiFi for anything requiring reliability. Download whatever you'll need before boarding.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 11. PROFESSIONALS ═══ -->
+<section id="pros" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 11 · Professional Protocols</span>
+    <h2 class="st">How Professionals Stay Connected</h2>
+    <p class="sd">Journalists, aid workers, sailors, and diplomats have developed distinct connectivity protocols shaped by specific environments and specific stakes. Their solutions offer real lessons for any serious traveler.</p>
+  </div>
+  <div class="pg">
+    <div class="pc"><div class="pr">Field Journalists</div><span class="kicker pk">Breaking Coverage · High Stakes · Hostile Environments</span><ul>
+      <li>Two phones minimum — one local SIM for access, one satellite-capable or home-country SIM for encrypted filing</li>
+      <li>Satellite backup for conflict zones: Iridium or Starlink for bandwidth-intensive video filing</li>
+      <li>Signal for source communications and editorial contact — encrypted by default, not by exception</li>
+      <li>A trusted local fixer network for SIM sourcing: they know which carrier covers which checkpoint, and which tower the military has taken offline</li>
+      <li>20,000+ mAh battery banks are oxygen in the field — carry them as you would carry water</li>
+      <li>Editorial check-in schedules established before departure, with escalation protocols if a check-in is missed</li>
+      <li>Comms discipline: specific messaging apps for specific contact types, not universal use of any single platform</li>
+    </ul></div>
+    <div class="pc"><div class="pr">Aid &amp; NGO Workers</div><span class="kicker pk">Remote Operations · Coordination-Dependent · Mission Critical</span><ul>
+      <li>BGAN terminals for established field offices — professional-grade bandwidth for video coordination and data reporting</li>
+      <li>Starlink increasingly replacing BGAN in stable field environments — dramatic cost reduction for the humanitarian sector</li>
+      <li>Local SIM procurement typically handled by logistics teams before deployment — workers arrive with working phones</li>
+      <li>UN and cluster coordination systems use dedicated HF/VHF radio frequencies as primary comms where cellular is unavailable</li>
+      <li>WhatsApp remains the field communication reality despite security limitations — adoption too widespread to replace in most operating environments</li>
+      <li>Offline humanitarian mapping tools (OsmAnd, Mapswipe) as a core data layer when internet is intermittent</li>
+    </ul></div>
+    <div class="pc"><div class="pr">Ocean Sailors</div><span class="kicker pk">Blue Water Passage · Self-Sufficient · Days From Assistance</span><ul>
+      <li>SSB (Single Sideband) radio for offshore passage: weather routing, position reporting, and emergency calls via maritime nets</li>
+      <li>AIS transponder broadcasting vessel position continuously — visible to commercial shipping and coast guard</li>
+      <li>Iridium for essential voice calls and GRIB weather file downloads on passage</li>
+      <li>Starlink Maritime has transformed long-distance sailing — a passage-making boat now has video calls in the Southern Ocean</li>
+      <li>Marina WiFi as primary in port; usually adequate, never relied upon for critical operations</li>
+      <li>EPIRB and PLB registered and current — these are rescue activators, not communications devices; understand the distinction</li>
+    </ul></div>
+    <div class="pc"><div class="pr">Diplomats &amp; Senior Business Travelers</div><span class="kicker pk">High-Frequency Travel · Sensitive Communications · Multi-Country</span><ul>
+      <li>Corporate international plans — cost-managed, number consistent, single billing, often pre-approved for high-risk markets</li>
+      <li>Virtual home-country phone numbers (Google Voice, Skype Number) as a persistent, accessible-from-anywhere contact point</li>
+      <li>VPN mandatory before travel to certain markets — provided and managed by IT in most organizations</li>
+      <li>Separate travel device policy in many corporations: a sanitized device crosses sensitive borders; personal device stays home</li>
+      <li>Risk-tiered communication: routine travel uses standard eSIM stack; high-risk destinations trigger separate protocols</li>
+      <li>Executive protection teams carry satellite comms as standard — never rely solely on host-country infrastructure</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 12. TRIAGE ═══ -->
+<section id="triage" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 12 · When Things Go Wrong</span>
+    <h2 class="st">Connectivity Triage</h2>
+    <p class="sd">When connectivity fails abroad, diagnosis is half the battle. These are the seven most common failure modes — with the most likely cause and corrective action for each.</p>
+  </div>
+  <div class="tl">
+    <div class="ti"><div class="tn">01</div><div class="tb"><div class="tp">No Signal At All — Phone Shows "No Service"</div><div class="ts">First: is your phone carrier-unlocked? A locked phone refuses all foreign SIMs. If unlocked, cycle airplane mode to force a fresh network search. If roaming, confirm roaming is enabled in Settings → Cellular. New local SIM: allow 5–10 minutes for network registration. Try manual network selection — if no networks appear at all, you're in a genuine dead zone.</div></div></div>
+    <div class="ti"><div class="tn">02</div><div class="tb"><div class="tp">Signal Shows But No Data Loads</div><div class="ts">Most common cause: incorrect APN settings. Every carrier requires specific APN configuration to route data. On iPhone: Settings → Cellular → Cellular Data Network. On Android: Settings → Network → Mobile Networks → Access Point Names. Tourist SIMs often push these automatically — remove and reinsert the SIM to trigger auto-configuration. Also confirm your data plan is active and your data allowance hasn't been exhausted.</div></div></div>
+    <div class="ti"><div class="tn">03</div><div class="tb"><div class="tp">Data Works But Is Extremely Slow</div><div class="ts">Three likely causes: (1) Roaming plan throttled after hitting a speed cap — check plan details for full-speed data limits; (2) Network congestion in tourist areas, airports, or event venues — move or wait for off-peak hours; (3) Phone connecting on 3G or 2G bands rather than 4G LTE — check the network indicator and try forcing LTE in Settings. Congestion-related slowdowns resolve themselves; band issues require settings intervention.</div></div></div>
+    <div class="ti"><div class="tn">04</div><div class="tb"><div class="tp">Can't Make or Receive Calls</div><div class="ts">Many tourist eSIMs and data SIMs are data-only — voice is not included, which is rarely prominently disclosed. Verify your plan includes voice. If calls worked before and stopped, check whether you've roamed onto a network your plan doesn't cover for voice. WiFi Calling is the reliable workaround: if you have any data connection — cellular or WiFi — you can call home. WhatsApp, FaceTime, and Signal calls over data work in most markets regardless of your voice plan.</div></div></div>
+    <div class="ti"><div class="tn">05</div><div class="tb"><div class="tp">Phone Says "Emergency Calls Only"</div><div class="ts">Your phone has found a network but cannot register on it — almost always because the phone is SIM-locked. Your home carrier's SIM works fine; any other SIM triggers the lock. Confirm with your carrier that the device is fully unlocked. Note: "Emergency Calls Only" while using your home SIM in a foreign country can also indicate that your carrier has no roaming partners in that specific location — a genuine dead zone from a roaming perspective.</div></div></div>
+    <div class="ti"><div class="tn">06</div><div class="tb"><div class="tp">eSIM Not Activating</div><div class="ts">eSIM activation requires an internet connection for the initial profile download — which creates a bootstrap problem when you're trying to get data. Use airport WiFi, hotel lobby WiFi, or your laptop's hotspot for the initial activation. If QR code scan fails, try the manual activation code as an alternative. Some eSIMs are geofenced to activate only within their coverage region — pre-purchased eSIMs may not complete activation until you physically arrive at the destination.</div></div></div>
+    <div class="ti"><div class="tn">07</div><div class="tb"><div class="tp">Unexpected Roaming Charges Despite Being on WiFi</div><div class="ts">Background apps — email, social media, cloud backup — continue consuming cellular data even when your phone is connected to WiFi, if data roaming is enabled and the WiFi connection drops momentarily. Solution: disable data roaming entirely (Settings → Cellular → Cellular Data → Roaming → Off) and rely exclusively on WiFi and WiFi Calling. Turn roaming back on deliberately and briefly only when you actually need it outside WiFi range.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 13. GRAY ZONES ═══ -->
+<section id="gray" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 13 · Special Operating Environments</span>
+    <h2 class="st">The Gray Zones</h2>
+    <p class="sd">Some destinations require communications planning well beyond the standard framework — through state control, infrastructure destruction, geographic isolation, or deliberate restriction.</p>
+  </div>
+  <div class="gzg">
+    <div class="gzc"><div class="gzn">North Korea</div><span class="kicker gzl">State Monopoly · No Foreign Internet Access</span><p class="gzd">Foreign travelers are issued a local Koryolink SIM upon arrival providing access to the domestic intranet only — no international internet, no calls outside the country. Foreign SIMs do not work. Any communication with the outside world is mediated through state infrastructure. Plan for complete communications isolation; notify all relevant parties before entry that you will be unreachable for the duration of your visit.</p></div>
+    <div class="gzc"><div class="gzn">Iran</div><span class="kicker gzl">Restricted Access · VPN Gray Zone</span><p class="gzd">Foreign SIMs do not roam in Iran — you must purchase a local Irancell or MCI SIM upon arrival, available at Tehran Imam Khomeini Airport. Instagram, Twitter/X, WhatsApp, and most Western platforms are officially blocked. VPN use is legally prohibited but widely practiced — install and test before arrival. The network itself is technically solid in cities; the restrictions are legislative, not infrastructural.</p></div>
+    <div class="gzc"><div class="gzn">Russia</div><span class="kicker gzl">Geopolitically Complex · Sanctions Impact</span><p class="gzd">Russian mobile infrastructure (MTS, Beeline, MegaFon) remains technically excellent. The complication is geopolitical: many foreign eSIM providers no longer operate there following 2022 sanctions. Several major Western messaging platforms are restricted. Physical local SIM purchase remains viable for travelers on valid entry. Coordination with Western institutions may require VPN, which is increasingly monitored.</p></div>
+    <div class="gzc"><div class="gzn">Myanmar</div><span class="kicker gzl">Post-Coup Instability · Deliberate Disruption</span><p class="gzd">Myanmar's military government has used telecommunications shutdowns as a governance tool since the 2021 coup — deliberately disabling internet access in specific regions during operations and protests. Meta platforms are blocked. Coverage is adequate in Yangon and Mandalay when available; the uncertainty is whether it will be available at all. A satellite messenger is non-optional for travel outside major cities.</p></div>
+    <div class="gzc"><div class="gzn">Active Conflict Zones</div><span class="kicker gzl">Infrastructure Targeted · Triple Redundancy Required</span><p class="gzd">In active conflict environments, telecommunications infrastructure is a military target. Towers are destroyed, fiber cut, operators forced offline. The only safe assumption is intermittent, unpredictable cellular coverage. Professional journalists and aid workers carry satellite as a primary system — not a backup. If you are traveling to an active conflict zone, this guide's standard recommendations do not apply. Seek specialist pre-deployment security training.</p></div>
+    <div class="gzc"><div class="gzn">Maritime Dead Zones</div><span class="kicker gzl">Beyond Cellular Range · Satellite Required</span><p class="gzd">International waters beyond approximately 20–30 nautical miles from shore sit outside all cellular coverage. Ocean passages, deep Caribbean or Pacific island-hopping, and any extended offshore maritime activity fall into this category. There is no cellular option. Starlink has made broadband viable for recreational sailors at a fraction of historical Inmarsat costs; Iridium remains the only system with guaranteed polar coverage. Maritime travelers who don't plan for satellite are not planning at all.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 14. OPSEC ═══ -->
+<section id="opsec" class="sw">
+<div class="wrap">
+  <div class="sh">
+    <span class="sn">Field Note 14 · Security Awareness</span>
+    <h2 class="st">OPSEC for the Aware Traveler</h2>
+    <p class="sd">Connectivity security exists on a spectrum. Most travelers need a few basic habits. Those operating in sensitive environments need a more deliberate posture. Know which category you fall into.</p>
+  </div>
+  <div class="og">
+    <div class="oc"><div class="ot">Use a VPN on Open Networks</div><span class="ol la">For Everyone</span><p class="od">Airport WiFi, hotel networks, cafe connections — any open or shared network is potentially observable by other users on the same infrastructure. A VPN encrypts your traffic between your device and the VPN server, eliminating this exposure. This is basic hygiene, comparable to locking your hotel room door. Install it before travel, test it before travel, run it by default on any network you didn't set up yourself.</p></div>
+    <div class="oc"><div class="ot">Pre-Install Your VPN Before Departure</div><span class="ol la">For Everyone</span><p class="od">VPN apps cannot be downloaded from the App Store or Google Play inside China. In any country restricting VPN access, an app not loaded before arrival cannot be obtained in-country. This is the single most common preparation failure. Install, log in, and test your VPN before you land anywhere you might need it. Don't wait until you're in the country.</p></div>
+    <div class="oc"><div class="ot">Encrypted Messaging as Default</div><span class="ol la">For Everyone</span><p class="od">Signal provides end-to-end encrypted messaging and calls at no cost. WhatsApp uses the same encryption protocol. iMessage is encrypted between Apple devices. Regular SMS is not encrypted and is accessible to any carrier — including foreign carriers whose security practices are unknown to you. Defaulting to encrypted apps costs nothing and provides meaningful protection anywhere you travel.</p></div>
+    <div class="oc"><div class="ot">Device Lock and Full Encryption</div><span class="ol lw">For the Aware</span><p class="od">Ensure full-device encryption is enabled (default on modern iOS; verify on Android). For border crossings where device inspection is a concern, use a PIN or password rather than biometrics — in most jurisdictions you cannot be legally compelled to provide a password, while biometrics offer weaker legal protection. This distinction is worth understanding before crossing into environments where device searches occur.</p></div>
+    <div class="oc"><div class="ot">Minimize Data on the Device</div><span class="ol lw">For the Aware</span><p class="od">If you're crossing a border where device inspection is plausible, consider what the device contains. Journalists with source communications, business travelers with competitive intelligence, and government personnel with sensitive files should consider whether a clean travel device makes sense. The practical principle: don't carry data you couldn't afford to have inspected at a border crossing.</p></div>
+    <div class="oc"><div class="ot">Separate Travel Device</div><span class="ol lp">Professional Environments</span><p class="od">Journalists, investigators, and business travelers operating in certain markets should maintain a dedicated travel device carrying only what's necessary for the specific trip. This device is sanitized before and after each high-risk deployment. Corporate IT departments routinely enforce this policy for travel to China, Russia, and other high-risk environments. The inconvenience is real. So is the risk mitigation.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ APPENDIX ═══ -->
+<div class="appendix" id="appendix">
+<div class="apw">
+  <div class="app-head" style="margin-bottom:2.5rem">
+    <p class="apwarn">Supplemental Reference · Niche Audience</p>
+    <h2 class="apt">Appendix: Advanced Operations</h2>
+    <p class="apd">For journalists, security researchers, intelligence-adjacent professionals, and technically inclined travelers operating in high-risk or high-complexity environments. This section assumes a higher threshold of technical familiarity and operational need.</p>
+  </div>
+  <div class="apg">
+    <div class="apc"><div class="apct">IMSI Catchers (Stingrays)</div><p>IMSI catchers impersonate cell towers, forcing nearby phones to connect and exposing device identifiers and call metadata. Used by law enforcement and intelligence services globally. Detection without specialized hardware is difficult. Practical countermeasures: encrypted communications over data rather than cellular voice, VPN, and in extreme cases, a faraday bag when device dormancy is required. Concern is proportionate to operational profile — most travelers have no reason to worry; those with reason to worry should plan accordingly.</p></div>
+    <div class="apc"><div class="apct">SS7 Protocol Vulnerabilities</div><p>SS7 (Signaling System 7) is the 1970s-era protocol that routes calls and SMS between carriers globally. Its security weaknesses are well-documented: actors with SS7 access can intercept SMS messages, track device location, and redirect calls. This is why SMS-based two-factor authentication is considered weak security — an adversary with SS7 access can intercept the verification code. Use authenticator apps (TOTP: Google Authenticator, Authy) rather than SMS 2FA for sensitive accounts when traveling in high-risk environments.</p></div>
+    <div class="apc"><div class="apct">Faraday Bags</div><p>A faraday bag blocks all radio signals to and from a device — cellular, WiFi, Bluetooth, NFC, GPS. A phone in a faraday bag cannot be tracked, cannot receive calls, and cannot be remotely accessed via any wireless vector. Used by law enforcement to preserve device forensic state, and by security-conscious travelers in specific environments. A real operational tool for specific situations, not a paranoid accessory for everyday travel.</p></div>
+    <div class="apc"><div class="apct">Software Defined Radio (SDR)</div><p>A $25 RTL-SDR dongle connected to a laptop can passively receive and decode a wide range of radio transmissions: ADS-B aircraft positions, AIS maritime vessel traffic, weather satellite imagery, and trunked radio systems. For journalists and intelligence-adjacent professionals, passive radio monitoring provides situational awareness in environments where cellular intelligence is unavailable or unreliable. A technical skill with genuine field applications for those operating in complex environments.</p></div>
+    <div class="apc"><div class="apct">Meshtastic / Offline Mesh Networking</div><p>Meshtastic creates encrypted mesh networks over LoRa radio between devices — enabling text communication over several kilometers without any cellular, internet, or commercial infrastructure. Each device acts as a relay node, extending range. Used by hikers, off-grid communities, and increasingly by journalists and activists in environments where cellular is monitored or unavailable. Hardware costs $30–$50 (Heltec or TTGO T-Beam). Range: 5–15km depending on terrain and antenna configuration.</p></div>
+    <div class="apc"><div class="apct">Amateur (Ham) Radio</div><p>A ham radio license (Technician class in the US) allows VHF/UHF operation globally via amateur repeater networks — mountains, remote coastlines, parts of the developing world where ham infrastructure predates cellular. An HF (shortwave) license enables worldwide communication on HF bands. For expedition travelers, a handheld VHF radio provides real communication options in dead zones. ICOM and Yaesu make professional-grade handheld units; the Baofeng UV-5R (~$25) is the accessible entry point.</p></div>
+    <div class="apc"><div class="apct">The Secure Comms Stack</div><p>The professional secure communications architecture for high-risk environments: Signal for messaging and voice (open-source, audited, end-to-end encrypted by default); ProtonMail or Tutanota for email (end-to-end encrypted, European jurisdiction); Mullvad or ProtonVPN for traffic encryption (verified no-log policies); Briar for fully offline encrypted messaging via Bluetooth or Tor when cellular infrastructure is compromised. Core principle: layered redundancy across independent systems. No single tool relied upon exclusively.</p></div>
+    <div class="apc"><div class="apct">Border Crossing Protocols</div><p>For travelers with sensitive data crossing borders where device inspection is plausible: (1) Full-device encryption enabled; (2) Complex PIN, biometrics disabled before approach; (3) Sensitive apps logged out, sensitive data moved to cloud and deleted from device; (4) Clean travel device for high-risk entries; (5) Know the legal context — US border agents can request but typically cannot legally compel passwords; UK RIPA can compel decryption; China and several others provide essentially no legal protections for foreign nationals. Know your specific jurisdiction before crossing.</p></div>
+  </div>
+  <div class="fn red" style="margin-top:2rem">
+    <strong>Operational Note</strong>
+    The techniques documented in this appendix are presented for legitimate professional purposes: journalists, researchers, security professionals, and travelers operating in demonstrably complex environments. The appropriate application of any of these tools is entirely context-dependent. When in doubt, consult with a digital security professional or your organization's security team before deployment.
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="fl">The Traveler's Communications Field Manual &nbsp;·&nbsp; A Reference for Global Connectivity</span>
+  <div class="fb">
+    <span style="height:6px"></span><span style="height:10px"></span>
+    <span style="height:15px"></span><span style="height:21px"></span>
+    <span style="height:28px"></span>
+  </div>
+</footer>
+
+</body>
+</html>
